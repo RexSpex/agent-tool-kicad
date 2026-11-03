@@ -1,0 +1,36 @@
+name: Validate Docker tool
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test setup safeguards
+        run: python3 -m unittest discover -s tests -p test_*.py
+      - name: Build and validate fresh workspace
+        run: python3 scripts/setup.py
+      - name: Verify terminal agent client
+        run: python3 scripts/mcp.py call get_installation_info
+      - name: Build and verify complete sample board
+        run: |
+          python3 tests/build_demo.py
+          python3 tests/route_demo.py
+          docker compose stop
+          docker compose run --rm --no-deps -T --entrypoint python3 kicad - < scripts/clean_demo.py
+          docker compose up -d --wait
+          python3 tests/verify_clean.py
+          docker compose exec -T kicad python3 - < tests/verify_saved.py
+      - name: Verify persistence after recreation
+        run: |
+          docker compose up -d --force-recreate --wait
+          python3 tests/smoke.py
+          python3 tests/verify_clean.py
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --tail 100
+      - name: Stop test containers
+        if: always()
+        run: docker compose down

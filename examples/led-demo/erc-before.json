@@ -1,0 +1,108 @@
+{
+  "coordinates": {
+    "kicad_version": "10.0.7",
+    "reason": "KiCad 10.0.7 carries the fix for the ERC JSON coordinate scaling defect (kicad#25582, fixed in 10.0.7), so its coordinates are passed through unchanged.",
+    "status": "verbatim"
+  },
+  "errors": 6,
+  "total": 6,
+  "violations": [
+    {
+      "description": "Pin not connected: Symbol J1 Pin 1 [Pin_1, Passive, Line]",
+      "items": [
+        {
+          "description": "Symbol J1 Pin 1 [Pin_1, Passive, Line]",
+          "uuid": "2ec1634d-6985-4da7-a65b-fcc6b6c7fc32",
+          "x": 95.25,
+          "y": 100.33
+        }
+      ],
+      "rule": "pin_not_connected",
+      "severity": "error",
+      "sheet": "/",
+      "x": 95.25,
+      "y": 100.33
+    },
+    {
+      "description": "Pin not connected: Symbol J1 Pin 2 [Pin_2, Passive, Line]",
+      "items": [
+        {
+          "description": "Symbol J1 Pin 2 [Pin_2, Passive, Line]",
+          "uuid": "30866707-f572-4a5f-b798-297fabdea2bc",
+          "x": 95.25,
+          "y": 102.87
+        }
+      ],
+      "rule": "pin_not_connected",
+      "severity": "error",
+      "sheet": "/",
+      "x": 95.25,
+      "y": 102.87
+    },
+    {
+      "description": "Pin not connected: Symbol R1 Pin 1 [Passive, Line]",
+      "items": [
+        {
+          "description": "Symbol R1 Pin 1 [Passive, Line]",
+          "uuid": "bdd4b63c-77fa-4e8d-b201-9f3b7afc00cf",
+          "x": 116.84,
+          "y": 100.33
+        }
+      ],
+      "rule": "pin_not_connected",
+      "severity": "error",
+      "sheet": "/",
+      "x": 116.84,
+      "y": 100.33
+    },
+    {
+      "description": "Pin not connected: Symbol R1 Pin 2 [Passive, Line]",
+      "items": [
+        {
+          "description": "Symbol R1 Pin 2 [Passive, Line]",
+          "uuid": "cf71a547-1496-4dd2-9b70-32074dfe7f88",
+          "x": 124.46,
+          "y": 100.33
+        }
+      ],
+      "rule": "pin_not_connected",
+      "severity": "error",
+      "sheet": "/",
+      "x": 124.46,
+      "y": 100.33
+    },
+    {
+      "description": "Pin not connected: Symbol D1 Pin 2 [A, Passive, Line]",
+      "items": [
+        {
+          "description": "Symbol D1 Pin 2 [A, Passive, Line]",
+          "uuid": "c8856020-eb7c-470a-be75-118cbf9ec4f3",
+          "x": 137.16,
+          "y": 100.33
+        }
+      ],
+      "rule": "pin_not_connected",
+      "severity": "error",
+      "sheet": "/",
+      "x": 137.16,
+      "y": 100.33
+    },
+    {
+      "description": "Pin not connected: Symbol D1 Pin 1 [K, Passive, Line]",
+      "items": [
+        {
+          "description": "Symbol D1 Pin 1 [K, Passive, Line]",
+          "uuid": "8a43d631-4697-4dd1-a2e5-a96b08f8b726",
+          "x": 144.78,
+          "y": 100.33
+        }
+      ],
+      "rule": "pin_not_connected",
+      "severity": "error",
+      "sheet": "/",
+      "x": 144.78,
+      "y": 100.33
+    }
+  ],
+  "warnings": 0
+}

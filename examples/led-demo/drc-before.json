@@ -1,0 +1,281 @@
+{
+  "violations": [
+    {
+      "severity": "warning",
+      "description": "Footprint 'LED_0805_2012Metric' does not match copy in library 'LED_SMD'",
+      "rule": "lib_footprint_mismatch",
+      "pos": {
+        "x": 115.0,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "Footprint D1",
+          "pos": {
+            "x": 115.0,
+            "y": 105.0
+          },
+          "uuid": "321f64d5-baa6-4f98-8806-8f485f1ce460",
+          "ownership_status": "resolved",
+          "item_kind": "footprint",
+          "layer": "F.Cu",
+          "owner": {
+            "kind": "board"
+          }
+        }
+      ]
+    },
+    {
+      "severity": "warning",
+      "description": "Footprint 'PinHeader_1x02_P2.54mm_Vertical' does not match copy in library 'Connector_PinHeader_2.54mm'",
+      "rule": "lib_footprint_mismatch",
+      "pos": {
+        "x": 105.0,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "Footprint J1",
+          "pos": {
+            "x": 105.0,
+            "y": 105.0
+          },
+          "uuid": "707adeca-d887-4076-95ab-ed8110711183",
+          "ownership_status": "resolved",
+          "item_kind": "footprint",
+          "layer": "F.Cu",
+          "owner": {
+            "kind": "board"
+          }
+        }
+      ]
+    },
+    {
+      "severity": "warning",
+      "description": "Footprint 'R_0805_2012Metric' does not match copy in library 'Resistor_SMD'",
+      "rule": "lib_footprint_mismatch",
+      "pos": {
+        "x": 110.0,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "Footprint R1",
+          "pos": {
+            "x": 110.0,
+            "y": 105.0
+          },
+          "uuid": "e2bddbcc-52a8-45d0-997b-71b412ec67e0",
+          "ownership_status": "resolved",
+          "item_kind": "footprint",
+          "layer": "F.Cu",
+          "owner": {
+            "kind": "board"
+          }
+        }
+      ]
+    }
+  ],
+  "unconnected_items": [
+    {
+      "severity": "error",
+      "description": "Missing connection between items",
+      "rule": "unconnected_items",
+      "pos": {
+        "x": 105.0,
+        "y": 107.539999
+      },
+      "items": [
+        {
+          "description": "PTH pad 2 [/GND] of J1",
+          "pos": {
+            "x": 105.0,
+            "y": 107.539999
+          },
+          "uuid": "102b1003-8eb0-4eba-bc21-ca4ed1eb5083",
+          "ownership_status": "resolved",
+          "item_kind": "pad",
+          "owner": {
+            "kind": "footprint",
+            "reference": "J1",
+            "uuid": "707adeca-d887-4076-95ab-ed8110711183"
+          }
+        },
+        {
+          "description": "Pad 1 [/GND] of D1 on F.Cu",
+          "pos": {
+            "x": 115.9375,
+            "y": 105.0
+          },
+          "uuid": "77fdd56e-b21a-4d82-928f-7a2bb6ade1d0",
+          "ownership_status": "resolved",
+          "item_kind": "pad",
+          "owner": {
+            "kind": "footprint",
+            "reference": "D1",
+            "uuid": "321f64d5-baa6-4f98-8806-8f485f1ce460"
+          }
+        }
+      ]
+    },
+    {
+      "severity": "error",
+      "description": "Missing connection between items",
+      "rule": "unconnected_items",
+      "pos": {
+        "x": 110.912499,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "Pad 2 [/LED_A] of R1 on F.Cu",
+          "pos": {
+            "x": 110.912499,
+            "y": 105.0
+          },
+          "uuid": "9057dcb4-9291-4e1c-84e9-37f9f03829ea",
+          "ownership_status": "resolved",
+          "item_kind": "pad",
+          "owner": {
+            "kind": "footprint",
+            "reference": "R1",
+            "uuid": "e2bddbcc-52a8-45d0-997b-71b412ec67e0"
+          }
+        },
+        {
+          "description": "Pad 2 [/LED_A] of D1 on F.Cu",
+          "pos": {
+            "x": 114.0625,
+            "y": 105.0
+          },
+          "uuid": "4e044993-c298-40a1-bfa6-bd38490b72fd",
+          "ownership_status": "resolved",
+          "item_kind": "pad",
+          "owner": {
+            "kind": "footprint",
+            "reference": "D1",
+            "uuid": "321f64d5-baa6-4f98-8806-8f485f1ce460"
+          }
+        }
+      ]
+    },
+    {
+      "severity": "error",
+      "description": "Missing connection between items",
+      "rule": "unconnected_items",
+      "pos": {
+        "x": 105.0,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "PTH pad 1 [/VIN] of J1",
+          "pos": {
+            "x": 105.0,
+            "y": 105.0
+          },
+          "uuid": "83a05db1-b161-42cf-add8-eeecb1223490",
+          "ownership_status": "resolved",
+          "item_kind": "pad",
+          "owner": {
+            "kind": "footprint",
+            "reference": "J1",
+            "uuid": "707adeca-d887-4076-95ab-ed8110711183"
+          }
+        },
+        {
+          "description": "Pad 1 [/VIN] of R1 on F.Cu",
+          "pos": {
+            "x": 109.0875,
+            "y": 105.0
+          },
+          "uuid": "a8f3840b-3578-4710-b405-ccce56ff08f2",
+          "ownership_status": "resolved",
+          "item_kind": "pad",
+          "owner": {
+            "kind": "footprint",
+            "reference": "R1",
+            "uuid": "e2bddbcc-52a8-45d0-997b-71b412ec67e0"
+          }
+        }
+      ]
+    }
+  ],
+  "schematic_parity": [
+    {
+      "severity": "warning",
+      "description": "Field 'Description' differs (PCB: '', Schematic: 'Light emitting diode')",
+      "rule": "footprint_symbol_field_mismatch",
+      "pos": {
+        "x": 115.0,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "Footprint D1",
+          "pos": {
+            "x": 115.0,
+            "y": 105.0
+          },
+          "uuid": "321f64d5-baa6-4f98-8806-8f485f1ce460",
+          "ownership_status": "resolved",
+          "item_kind": "footprint",
+          "layer": "F.Cu",
+          "owner": {
+            "kind": "board"
+          }
+        }
+      ]
+    },
+    {
+      "severity": "warning",
+      "description": "Field 'Description' differs (PCB: '', Schematic: 'Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)')",
+      "rule": "footprint_symbol_field_mismatch",
+      "pos": {
+        "x": 105.0,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "Footprint J1",
+          "pos": {
+            "x": 105.0,
+            "y": 105.0
+          },
+          "uuid": "707adeca-d887-4076-95ab-ed8110711183",
+          "ownership_status": "resolved",
+          "item_kind": "footprint",
+          "layer": "F.Cu",
+          "owner": {
+            "kind": "board"
+          }
+        }
+      ]
+    },
+    {
+      "severity": "warning",
+      "description": "Field 'Description' differs (PCB: '', Schematic: 'Resistor')",
+      "rule": "footprint_symbol_field_mismatch",
+      "pos": {
+        "x": 110.0,
+        "y": 105.0
+      },
+      "items": [
+        {
+          "description": "Footprint R1",
+          "pos": {
+            "x": 110.0,
+            "y": 105.0
+          },
+          "uuid": "e2bddbcc-52a8-45d0-997b-71b412ec67e0",
+          "ownership_status": "resolved",
+          "item_kind": "footprint",
+          "layer": "F.Cu",
+          "owner": {
+            "kind": "board"
+          }
+        }
+      ]
+    }
+  ]
+}

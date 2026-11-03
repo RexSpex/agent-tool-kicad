@@ -1,0 +1,21 @@
+services:
+  kicad:
+    build: .
+    image: agent-tool-kicad:local
+    platform: linux/amd64
+    restart: unless-stopped
+    init: true
+    ports:
+      - "${KICAD_BIND_ADDRESS:-127.0.0.1}:${KICAD_PORT:-48322}:8080"
+    volumes:
+      - workspace:/workspace
+      - home:/home/cad
+    mem_limit: ${KICAD_MEMORY_LIMIT:-6g}
+    cpus: ${KICAD_CPUS:-4}
+    pids_limit: 512
+    shm_size: 256m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+volumes:
+  workspace:
+  home:

@@ -1,0 +1,10 @@
+.evidence/
+__pycache__/
+*.pyc
+.env
+output/
+.playwright-cli/
+*.lck
+*.kicad_prl
+.history/
+.repair-backups/

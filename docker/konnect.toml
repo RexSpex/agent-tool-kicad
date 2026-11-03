@@ -1,0 +1,7 @@
+transport = "http"
+http_address = "127.0.0.1:8000"
+kicad_cli = "/usr/bin/kicad-cli"
+kicad_binary = "/usr/bin/kicad"
+project_dir = "/workspace/led-demo"
+ipc_address = "ipc:///tmp/kicad/api.sock"
+auto_load_toolsets = true

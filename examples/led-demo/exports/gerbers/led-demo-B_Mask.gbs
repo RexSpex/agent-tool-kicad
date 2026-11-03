@@ -1,0 +1,23 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,10.0.7-10.0.7~ubuntu24.04.1*%
+%TF.CreationDate,2026-10-15T19:35:34+00:00*%
+%TF.ProjectId,led-demo,6c65642d-6465-46d6-9f2e-6b696361645f,rev?*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,Soldermask,Bot*%
+%TF.FilePolarity,Negative*%
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 10.0.7-10.0.7~ubuntu24.04.1) date 2026-10-15 19:35:34*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%ADD10R,1.700000X1.700000*%
+%ADD11C,1.700000*%
+G04 APERTURE END LIST*
+D10*
+%TO.C,J1*%
+X105000000Y-105000000D03*
+D11*
+X105000000Y-107540000D03*
+%TD*%
+M02*

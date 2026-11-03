@@ -1,0 +1,7 @@
+.git
+docs
+.evidence
+__pycache__
+vendor
+output
+.playwright-cli

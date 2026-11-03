@@ -1,0 +1,41 @@
+{
+  "changes": [
+    {
+      "reference": "D1",
+      "field": "Description",
+      "source": "KiCad schematic netlist"
+    },
+    {
+      "reference": "J1",
+      "field": "Description",
+      "source": "KiCad schematic netlist"
+    },
+    {
+      "reference": "R1",
+      "field": "Description",
+      "source": "KiCad schematic netlist"
+    },
+    {
+      "reference": "R1",
+      "pad": "1",
+      "width_nm_before": 1024999,
+      "width_nm_after": 1025000
+    },
+    {
+      "reference": "R1",
+      "pad": "2",
+      "width_nm_before": 1024999,
+      "width_nm_after": 1025000
+    }
+  ],
+  "erc_errors": 0,
+  "erc_warnings": 0,
+  "drc_errors": 0,
+  "drc_warnings": 0,
+  "unconnected_items": 0,
+  "schematic_parity": 0,
+  "rules_unchanged": true,
+  "placement_routing_nets_unchanged": true,
+  "backup_sha256": "e042ea3ac8082dbe8fe512b733ab43fa5229d0f7fff3062e2399d5717bcebfe1",
+  "board_sha256": "b4b0931d9426c83890360463f2d10fa00ea0fec38fe1ae9a038b61815f63d754"
+}
