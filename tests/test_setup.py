@@ -33,7 +33,7 @@ class SetupTests(unittest.TestCase):
             from types import SimpleNamespace
             calls.append((args, kwargs))
             return SimpleNamespace(stdout=json.dumps(config) if "config" in args else
-                                   '{"OSType":"linux"}' if "info" in args else "")
+                                   '{"OSType":"linux","NCPU":2}' if "info" in args else "")
         with tempfile.TemporaryDirectory() as directory, patch.object(setup, "ROOT", Path(directory)), \
                 patch.object(setup, "run", side_effect=run), patch.object(setup.shutil, "which", return_value="docker"), \
                 patch.object(setup.shutil, "disk_usage") as disk, \
@@ -44,6 +44,7 @@ class SetupTests(unittest.TestCase):
             self.assertIn(f"{setup.PREFIX}_PORT={setup.DEFAULT_PORT + 1}", (Path(directory) / ".env").read_text())
             startup = next(kwargs for args, kwargs in calls if "up" in args)
             self.assertEqual(startup["env"][setup.PREFIX + "_PORT"], str(setup.DEFAULT_PORT + 1))
+            self.assertEqual(startup["env"][setup.PREFIX + "_CPUS"], "2")
             smoke = next(args for args, kwargs in calls if "tests/smoke.py" in args)
             self.assertEqual(smoke[-1], f"http://localhost:{setup.DEFAULT_PORT + 1}")
 
@@ -52,7 +53,7 @@ class SetupTests(unittest.TestCase):
         def run(*args, **kwargs):
             from types import SimpleNamespace
             return SimpleNamespace(stdout=json.dumps(config) if "config" in args else
-                                   '{"OSType":"linux"}' if "info" in args else "")
+                                   '{"OSType":"linux","NCPU":2}' if "info" in args else "")
         with tempfile.TemporaryDirectory() as directory, patch.object(setup, "ROOT", Path(directory)), \
                 patch.object(setup, "run", side_effect=run), patch.object(setup.shutil, "which", return_value="docker"), \
                 patch.object(setup.shutil, "disk_usage") as disk, \

@@ -4,6 +4,19 @@ import json
 import sys
 import urllib.request
 
+def failed(value):
+    if isinstance(value, dict):
+        return value.get("isError", False) or value.get("success") is False or any(failed(item) for item in value.values())
+    if isinstance(value, list):
+        return any(failed(item) for item in value)
+    if isinstance(value, str):
+        try:
+            decoded = json.loads(value)
+        except ValueError:
+            return False
+        return failed(decoded) if isinstance(decoded, (dict, list)) else False
+    return False
+
 class Client:
     def __init__(self, url):
         self.url = url.rstrip("/")
@@ -43,7 +56,7 @@ class Client:
 
     def close(self):
         if self.session:
-            request = urllib.request.Request(self.url, method="DELETE", headers={"Mcp-Session-Id": self.session})
+            request = urllib.request.Request(self.url, method="DELETE", headers={"Mcp-Session-Id": self.session, "MCP-Protocol-Version": self.protocol})
             try:
                 with urllib.request.urlopen(request, timeout=10):
                     pass
@@ -77,7 +90,7 @@ def main():
                 parser.error("tool arguments must be a JSON object")
             result = client.rpc("tools/call", {"name": args.name, "arguments": arguments})
         print(json.dumps(result, indent=2))
-        if result.get("isError"):
+        if args.action == "call" and failed(result):
             sys.exit(1)
     finally:
         client.close()

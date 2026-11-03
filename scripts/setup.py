@@ -26,15 +26,18 @@ def available(port):
         except OSError:
             return False
 
-def set_port(path, port):
+def set_setting(path, suffix, value):
     original = path.read_text() if path.exists() else ""
-    key = PREFIX + "_PORT"
+    key = PREFIX + "_" + suffix
     pattern = re.compile(r"(?m)^\s*(?:export\s+)?" + key + r"\s*=.*$")
-    updated = pattern.sub(key + "=" + str(port), original)
+    updated = pattern.sub(key + "=" + str(value), original)
     if updated == original and not pattern.search(original):
-        updated = original + ("\n" if original and not original.endswith("\n") else "") + key + "=" + str(port) + "\n"
+        updated = original + ("\n" if original and not original.endswith("\n") else "") + key + "=" + str(value) + "\n"
     if updated != original:
         path.write_text(updated)
+
+def set_port(path, port):
+    set_setting(path, "PORT", port)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -71,8 +74,16 @@ def main():
                 break
         else:
             raise RuntimeError("No free port in preferred range. Select --port explicitly.")
+    requested_cpus = float(service.get("cpus", 4))
+    available_cpus = system.get("NCPU", 4)
+    cpus = min(requested_cpus, available_cpus)
+    if requested_cpus > available_cpus and os.environ.get(PREFIX + "_CPUS"):
+        raise RuntimeError(f"Docker has {available_cpus} CPUs. Lower {PREFIX}_CPUS environment override first.")
+    if requested_cpus > available_cpus:
+        set_setting(ROOT / ".env", "CPUS", cpus)
+        print(f"CPU limit reduced to {cpus} for this Docker engine.")
     set_port(ROOT / ".env", port)
-    env = dict(os.environ, **{PREFIX + "_PORT": str(port)})
+    env = dict(os.environ, **{PREFIX + "_PORT": str(port), PREFIX + "_CPUS": str(cpus)})
     run("docker", "compose", "up", "-d", "--build", "--wait", "--wait-timeout", "300", env=env)
     origin = f"http://localhost:{port}"
     run(sys.executable, "tests/smoke.py", origin)
