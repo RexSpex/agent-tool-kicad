@@ -11,7 +11,7 @@ Use https://github.com/RexSpex/agent-tool-kicad on this computer.
    Install missing prerequisites through supported OS methods and follow approval rules.
    Start Docker using Linux containers. Never ask for credentials in chat.
    Docker needs 6 GiB available memory; leave room for other running services.
-   KiCad image requires linux/amd64. Apple Silicon uses Docker emulation; other architectures are not validated.
+   KiCad image builds natively on Linux amd64 and arm64, including Apple Silicon. ARM64 builds Konnect from vendored source and needs extra build time.
 2. Clone https://github.com/RexSpex/agent-tool-kicad.git into a suitable local projects directory, or reuse its matching checkout.
    Read README.md and AGENTS.md. Preserve existing local files and settings.
 3. Run python3 scripts/setup.py from repository directory (use python or py -3 on Windows).

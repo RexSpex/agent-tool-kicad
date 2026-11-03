@@ -2,7 +2,6 @@ services:
   kicad:
     build: .
     image: agent-tool-kicad:local
-    platform: linux/amd64
     restart: unless-stopped
     init: true
     ports:

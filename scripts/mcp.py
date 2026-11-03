@@ -2,6 +2,7 @@
 import argparse
 import base64
 import json
+import os
 from pathlib import Path
 import sys
 import urllib.request
@@ -52,7 +53,7 @@ class Client:
         if self.protocol:
             headers["MCP-Protocol-Version"] = self.protocol
         request = urllib.request.Request(self.url, data=json.dumps(message).encode(), headers=headers)
-        with urllib.request.urlopen(request, timeout=180) as response:
+        with urllib.request.urlopen(request, timeout=float(os.environ.get("MCP_HTTP_TIMEOUT_SECONDS", "7200"))) as response:
             self.session = response.headers.get("Mcp-Session-Id", self.session)
             raw = response.read().decode()
         if notify:

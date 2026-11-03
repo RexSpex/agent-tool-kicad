@@ -50,8 +50,9 @@ Cloud-only agents need an approved route to your computer; localhost URLs work o
 ## Run
 
 Requires Docker Engine with Compose v2, or Docker Desktop using Linux containers.
-Allocate at least 6 GiB memory to Docker. This image targets Linux amd64;
-Apple Silicon uses Docker's amd64 emulation, validated with Docker Desktop 4.91.0 (Docker Engine 29.8.0).
+Allocate at least 6 GiB memory to Docker. Image builds natively on Linux amd64 and arm64, including Apple Silicon.
+ARM64 compiles Konnect from vendored source; first build takes longer.
+For deliberate emulation, use Docker standard override `DOCKER_DEFAULT_PLATFORM=linux/amd64`.
 
 ```bash
 git clone https://github.com/RexSpex/agent-tool-kicad.git
@@ -107,6 +108,7 @@ docker compose down
 
 ```bash
 python3 tests/smoke.py http://localhost:48322
+python3 tests/freerouting.py http://localhost:48322
 python3 tests/build_demo.py http://localhost:48322
 python3 tests/route_demo.py http://localhost:48322
 docker compose stop
@@ -152,7 +154,11 @@ to trusted clients. Use the standard localhost endpoints for local operation.
 
 ## Components and source
 
-KiCad 10 from official stable PPA, Konnect v0.13.0, Xvfb, Fluxbox, x11vnc,
-noVNC/websockify, nginx, and Supervisor. Konnect release archive is checksum
-verified. Matching unmodified source and license are included under
-`vendor/Konnect`. See `UPSTREAM.md`. Package uses AGPL-3.0.
+KiCad 10 from official stable PPA, Konnect v0.13.0, FreeRouting v2.3.0,
+Temurin Java 25, Xvfb, Fluxbox, x11vnc, noVNC/websockify, nginx, and Supervisor.
+Konnect amd64 release archive and FreeRouting JAR are checksum verified.
+ARM64 builds same Konnect version from unmodified source in `vendor/Konnect`.
+See `UPSTREAM.md`. Package uses AGPL-3.0.
+
+FreeRouting lives at `/opt/freerouting/freerouting.jar`. Nginx and terminal clients
+allow routing requests up to two hours. Set `MCP_HTTP_TIMEOUT_SECONDS` to adjust client timeout.

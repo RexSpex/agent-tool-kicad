@@ -1,10 +1,12 @@
 """Small standard-library MCP client used by acceptance checks."""
 import json
+import os
 import urllib.request
 
 class Client:
-    def __init__(self, origin):
+    def __init__(self, origin, timeout=None):
         self.origin = origin.rstrip('/')
+        self.timeout = timeout or float(os.environ.get('MCP_HTTP_TIMEOUT_SECONDS', '7200'))
         self.sequence = 0
         self.rpc('initialize', {'protocolVersion': '2025-06-18', 'capabilities': {},
                               'clientInfo': {'name': 'agent-tool-kicad-acceptance', 'version': '1'}})
@@ -18,7 +20,7 @@ class Client:
         req = urllib.request.Request(self.origin + '/mcp', data=json.dumps(payload).encode(),
                                     headers={'Content-Type': 'application/json',
                                              'Accept': 'application/json, text/event-stream'})
-        with urllib.request.urlopen(req, timeout=180) as response:
+        with urllib.request.urlopen(req, timeout=self.timeout) as response:
             raw = response.read()
         if notify:
             return None
