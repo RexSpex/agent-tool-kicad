@@ -51,7 +51,7 @@ Cloud-only agents need an approved route to your computer; localhost URLs work o
 
 Requires Docker Engine with Compose v2, or Docker Desktop using Linux containers.
 Allocate at least 6 GiB memory to Docker. This image targets Linux amd64;
-Apple Silicon uses Docker's amd64 emulation, validated with Docker Desktop 29.8.0.
+Apple Silicon uses Docker's amd64 emulation, validated with Docker Desktop 4.91.0 (Docker Engine 29.8.0).
 
 ```bash
 git clone https://github.com/RexSpex/agent-tool-kicad.git

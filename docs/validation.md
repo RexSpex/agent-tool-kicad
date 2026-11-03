@@ -3,7 +3,7 @@
 ## 2026-11-03
 
 [Linux amd64 workflow](https://github.com/RexSpex/agent-tool-kicad/actions/runs/41672499176) passes on Ubuntu 24.04.
-Docker Desktop 29.8.0 on macOS Apple Silicon passes using Linux amd64 emulation.
+Docker Desktop 4.91.0 (Docker Engine 29.8.0) on macOS Apple Silicon passes using Linux amd64 emulation.
 KiCad 10.0.8 and Konnect 0.13.0 run in both tests.
 
 Both environments pass build, healthy startup, desktop redirect, VNC handshake,
