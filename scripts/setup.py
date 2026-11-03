@@ -47,11 +47,13 @@ def main():
         parser.error("port must be between 1 and 65535")
     if not shutil.which("docker"):
         raise RuntimeError("Install Docker with Compose v2 and start Docker first.")
-    if shutil.disk_usage(ROOT).free < 12 * 1024**3:
-        raise RuntimeError("Free at least 12 GiB on host disk before building Docker image.")
     system = json.loads(run("docker", "info", "--format", "{{json .}}", capture=True).stdout)
     if system["OSType"] != "linux":
         raise RuntimeError("Switch Docker to Linux containers first.")
+    architecture = os.environ.get("DOCKER_DEFAULT_PLATFORM", "").rsplit("/", 1)[-1] or system.get("Architecture", "amd64")
+    required_disk = 20 if architecture in ("aarch64", "arm64") else 12
+    if shutil.disk_usage(ROOT).free < required_disk * 1024**3:
+        raise RuntimeError(f"Free at least {required_disk} GiB on host disk before building Docker image.")
     run("docker", "compose", "version", capture=True)
     config = json.loads(run("docker", "compose", "config", "--format", "json", capture=True).stdout)
     service = config["services"][SERVICE]
@@ -87,6 +89,7 @@ def main():
     run("docker", "compose", "up", "-d", "--build", "--wait", "--wait-timeout", "300", env=env)
     origin = f"http://localhost:{port}"
     run(sys.executable, "tests/smoke.py", origin)
+    run(sys.executable, "tests/freerouting.py", origin)
     print(f"Desktop: {origin}/\nMCP: {origin}/mcp\nPort saved in {ROOT / '.env'}")
     print("Configure this MCP URL in your agent harness. See AGENT_PROMPT.md.")
 

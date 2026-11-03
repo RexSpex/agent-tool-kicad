@@ -13,6 +13,17 @@ spec.loader.exec_module(setup)
 
 
 class SetupTests(unittest.TestCase):
+    def test_native_arm_build_checks_extra_disk_before_startup(self):
+        from types import SimpleNamespace
+        with patch.object(setup, "run", return_value=SimpleNamespace(stdout='{"OSType":"linux","Architecture":"aarch64"}')) as run, \
+                patch.object(setup.shutil, "which", return_value="docker"), \
+                patch.object(setup.shutil, "disk_usage") as disk, \
+                patch.dict(setup.os.environ, {}, clear=True), patch("sys.argv", ["setup.py"]):
+            disk.return_value.free = 15 * 1024**3
+            with self.assertRaisesRegex(RuntimeError, "20 GiB"):
+                setup.main()
+            self.assertEqual(run.call_count, 1)
+
     def test_port_update_preserves_other_settings(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / ".env"

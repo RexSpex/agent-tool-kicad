@@ -20,9 +20,10 @@ Clone repository, enter directory, then run:
 python3 scripts/setup.py
 ```
 
-Keep at least 12 GiB free on host disk before building.
+Keep at least 12 GiB free on host disk before building; native ARM64 builds need 20 GiB for Rust build data.
 Python 3.10+ standard library is enough. On Windows, use `py -3` or `python` if needed.
 Setup preserves other .env settings, checks loopback port availability, and runs smoke checks.
+Setup also verifies FreeRouting native MCP integration.
 On small machines, setup caps CPU limit to Docker engine CPU count and saves that limit.
 Default host port: **48322**. Occupied defaults use another available port, saved in .env.
 To require a specific free port, use `python3 scripts/setup.py --port 49000`.

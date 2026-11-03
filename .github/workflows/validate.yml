@@ -12,8 +12,6 @@ jobs:
         run: python3 -m unittest discover -s tests -p test_*.py
       - name: Build and validate fresh workspace
         run: python3 scripts/setup.py
-      - name: Verify FreeRouting integration
-        run: python3 tests/freerouting.py
       - name: Verify terminal agent client
         run: python3 scripts/mcp.py call get_installation_info
       - name: Build and verify complete sample board

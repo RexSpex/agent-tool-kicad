@@ -1,29 +1,32 @@
 # Validation
 
-## 2026-11-03
+## Native builds — 2026-11-03
 
-[Linux amd64 workflow](https://github.com/RexSpex/agent-tool-kicad/actions/runs/41672499176) passes on Ubuntu 24.04.
-Docker Desktop 4.91.0 (Docker Engine 29.8.0) on macOS Apple Silicon passes using Linux amd64 emulation.
-KiCad 10.0.8 and Konnect 0.13.0 run in both tests.
+[Linux amd64 workflow](https://github.com/RexSpex/agent-tool-kicad/actions/runs/41694761878) validates native amd64 packaging on Ubuntu 24.04.
+Docker Desktop 4.91.0 (Docker Engine 29.8.0) on macOS Apple Silicon validates native Linux arm64 packaging.
+KiCad 10.0.8, Konnect 0.13.0, FreeRouting 2.3.0, and Java 25 run in both builds.
+ARM64 compiles unchanged Konnect source with pinned Rust 1.96.0; amd64 verifies release archive checksum.
 
-Both environments pass build, healthy startup, desktop redirect, VNC handshake,
-MCP discovery, installation info, live PCB IPC, and foreign-Origin rejection.
+Checks cover build, healthy startup, desktop redirect, VNC handshake, MCP discovery,
+live PCB IPC, foreign-Origin rejection, and FreeRouting native MCP integration.
 Fresh sample workflow creates schematic, synchronizes PCB, routes six tracks,
-repairs managed demo, exports review/manufacturing files, and reads saved board independently.
+repairs managed demo, exports files, and reads saved board independently.
 Board measures 25 × 17 mm with three footprints. Full ERC and DRC report zero
 errors, warnings, missing connections, and schematic parity differences.
 Ten Gerber/job/drill files plus PCB PDF/SVG and schematic PDF/PNG are produced.
-Project and clean checks survive container recreation.
-Terminal MCP client calls installation info. Seven Python tests cover setup safeguards,
-JSON/SSE negotiation, sessions, nested errors, and local image artifacts.
+Project and clean checks survive container recreation. Terminal MCP client calls
+installation info and FreeRouting checks. Eight Python tests cover setup safeguards,
+JSON/SSE negotiation, sessions, nested errors, image artifacts, and ARM64 disk preflight.
 
 Default host port is 48322. Setup selects another free port when occupied,
 saves selected port in .env, and caps CPU limit to available Docker CPUs.
-Container port remains 8080. Build needs at least 12 GiB free host disk.
-OpenSCAD runs alongside KiCad on separate default port 48321.
+Native ARM64 validation also runs successfully on automatically selected port 48323.
+Container port remains 8080. Builds need 12 GiB free host disk for amd64,
+or 20 GiB for native ARM64 source compilation. Setup verifies FreeRouting automatically.
+Routing HTTP timeout defaults to two hours and remains configurable.
 
-Windows and native Linux arm64 are not tested. Native harness configuration is
-client-specific; terminal MCP client is tested. Software checks do not establish physical circuit performance.
+Windows is not tested. Native harness configuration remains client-specific;
+terminal MCP client is tested. Software checks do not establish physical circuit performance.
 
 ## Earlier validation — 2026-10-15
 
