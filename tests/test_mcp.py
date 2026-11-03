@@ -1,7 +1,9 @@
 """Verify JSON/SSE negotiation and nested tool error handling."""
 import importlib.util
 import json
+import base64
 from pathlib import Path
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -21,6 +23,15 @@ class Response:
         return self.body
 
 class ClientTests(unittest.TestCase):
+    def test_images_become_local_artifacts_without_overwriting(self):
+        image = b"\x89PNG\r\n\x1a\nexample"
+        result = {"content": [{"type": "image", "mimeType": "image/png", "data": base64.b64encode(image).decode()}]}
+        with tempfile.TemporaryDirectory() as directory:
+            mcp_client.save_images(result, Path(directory))
+            block = result["content"][0]
+            self.assertNotIn("data", block)
+            self.assertEqual(Path(block["file_path"]).read_bytes(), image)
+
     def test_negotiated_protocol_and_session_survive_sse(self):
         responses = [
             Response(json.dumps({"jsonrpc": "2.0", "id": 1, "result": {"protocolVersion": "2025-06-18"}})),

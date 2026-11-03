@@ -1,4 +1,31 @@
-# Validation — 2026-10-15
+# Validation
+
+## 2026-11-03
+
+[Linux amd64 workflow](https://github.com/RexSpex/agent-tool-kicad/actions/runs/41672499176) passes on Ubuntu 24.04.
+Docker Desktop 29.8.0 on macOS Apple Silicon passes using Linux amd64 emulation.
+KiCad 10.0.8 and Konnect 0.13.0 run in both tests.
+
+Both environments pass build, healthy startup, desktop redirect, VNC handshake,
+MCP discovery, installation info, live PCB IPC, and foreign-Origin rejection.
+Fresh sample workflow creates schematic, synchronizes PCB, routes six tracks,
+repairs managed demo, exports review/manufacturing files, and reads saved board independently.
+Board measures 25 × 17 mm with three footprints. Full ERC and DRC report zero
+errors, warnings, missing connections, and schematic parity differences.
+Ten Gerber/job/drill files plus PCB PDF/SVG and schematic PDF/PNG are produced.
+Project and clean checks survive container recreation.
+Terminal MCP client calls installation info. Seven Python tests cover setup safeguards,
+JSON/SSE negotiation, sessions, nested errors, and local image artifacts.
+
+Default host port is 48322. Setup selects another free port when occupied,
+saves selected port in .env, and caps CPU limit to available Docker CPUs.
+Container port remains 8080. Build needs at least 12 GiB free host disk.
+OpenSCAD runs alongside KiCad on separate default port 48321.
+
+Windows and native Linux arm64 are not tested. Native harness configuration is
+client-specific; terminal MCP client is tested. Software checks do not establish physical circuit performance.
+
+## Earlier validation — 2026-10-15
 
 Linux amd64; Docker Engine and Compose v2.40.3.
 KiCad 10.0.7; Konnect 0.13.0, commit

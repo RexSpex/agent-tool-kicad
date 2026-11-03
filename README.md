@@ -41,6 +41,8 @@ python3 scripts/mcp.py --url http://localhost:48322/mcp list
 python3 scripts/mcp.py --url http://localhost:48322/mcp call get_installation_info
 ```
 
+Returned images save under `.agent-output/`; CLI prints local file paths instead of base64.
+Use `--images-dir` to choose another directory.
 For tool arguments, pass a JSON object or `@arguments.json`. Client returns JSON and exits nonzero on tool errors.
 Read live tool schemas before creating designs. Setup and connection checks do not prove design correctness.
 Cloud-only agents need an approved route to your computer; localhost URLs work only on Docker host.
@@ -49,7 +51,7 @@ Cloud-only agents need an approved route to your computer; localhost URLs work o
 
 Requires Docker Engine with Compose v2, or Docker Desktop using Linux containers.
 Allocate at least 6 GiB memory to Docker. This image targets Linux amd64;
-Apple Silicon uses Docker's amd64 emulation, which has not been validated.
+Apple Silicon uses Docker's amd64 emulation, validated with Docker Desktop 29.8.0.
 
 ```bash
 git clone https://github.com/RexSpex/agent-tool-kicad.git

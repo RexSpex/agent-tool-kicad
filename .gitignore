@@ -8,3 +8,5 @@ output/
 *.kicad_prl
 .history/
 .repair-backups/
+
+.agent-output/

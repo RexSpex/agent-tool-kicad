@@ -1,8 +1,21 @@
 """Call local Streamable HTTP MCP from any agent with terminal access."""
 import argparse
+import base64
 import json
+from pathlib import Path
 import sys
 import urllib.request
+import uuid
+
+def save_images(result, directory):
+    for block in result.get("content", []):
+        if block.get("type") == "image" and "data" in block:
+            directory.mkdir(parents=True, exist_ok=True)
+            suffix = {"image/png": ".png", "image/jpeg": ".jpg", "image/webp": ".webp"}.get(block.get("mimeType"), ".bin")
+            path = directory / (uuid.uuid4().hex + suffix)
+            path.write_bytes(base64.b64decode(block["data"], validate=True))
+            del block["data"]
+            block["file_path"] = str(path.resolve())
 
 def failed(value):
     if isinstance(value, dict):
@@ -66,6 +79,7 @@ class Client:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", default="http://localhost:48322/mcp")
+    parser.add_argument("--images-dir", type=Path, default=Path(".agent-output"), help="Save returned images and print file paths")
     parser.add_argument("action", choices=["list", "call"])
     parser.add_argument("name", nargs="?")
     parser.add_argument("arguments", nargs="?", default="{}", help="JSON object or @path/to/arguments.json")
@@ -83,12 +97,12 @@ def main():
                 parser.error("call requires tool name")
             value = args.arguments
             if value.startswith("@"):
-                from pathlib import Path
                 value = Path(value[1:]).read_text()
             arguments = json.loads(value)
             if not isinstance(arguments, dict):
                 parser.error("tool arguments must be a JSON object")
             result = client.rpc("tools/call", {"name": args.name, "arguments": arguments})
+        save_images(result, args.images_dir)
         print(json.dumps(result, indent=2))
         if args.action == "call" and failed(result):
             sys.exit(1)

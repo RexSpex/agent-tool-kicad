@@ -5,3 +5,5 @@ __pycache__
 vendor
 output
 .playwright-cli
+
+.agent-output
